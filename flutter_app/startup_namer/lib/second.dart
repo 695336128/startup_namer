@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SeconPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -73,6 +72,11 @@ class MyScaffold extends StatelessWidget{
                     .title,
               )
           ),
+          ImageTestWidget(),
+          SwitchAndCheckBoxTestRoute(),
+          TextTestWidget(),
+          ButtonTestWidget(),
+          TextFieldTestWidget(),
           Expanded(
             child: Center(
               child: Text(
@@ -84,6 +88,178 @@ class MyScaffold extends StatelessWidget{
       ),
     );
   }
+}
+
+class ImageTestWidget extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Image(
+          width: 100,
+          height: 100,
+          image: AssetImage('assets/images/checkcircle.png'),
+        ),
+        Image.network(
+          "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4",
+          width: 100,
+          height: 100,
+          fit: BoxFit.fill,
+        ),
+        Text(
+          "\uE914",
+          style: TextStyle(
+              fontFamily: "MaterialIcons",
+              fontSize: 24.0,
+              color: Colors.red
+          ),
+        ),
+        Icon(Icons.accessible,color: Colors.red,)
+      ],
+    );
+  }
+
+}
+
+
+class TextTestWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Text("Hello World",
+          textAlign: TextAlign.center,
+        ),
+        Text("Hello World" * 4,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Colors.red,
+              fontStyle: FontStyle.italic
+          ),
+        ),
+        Text.rich(
+            TextSpan(
+                children: [
+                  TextSpan(
+                      text: "Home: "
+                  ),
+                  TextSpan(
+                      text: "http://flutterchina.club",
+                      style: TextStyle(
+                          color: Colors.blue
+                      )
+                  )
+                ]
+            )
+        ),
+
+      ],
+    );
+  }
+
+}
+
+class SwitchAndCheckBoxTestRoute extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => _SwitchAndCheckBoxTestRouteState();
+}
+
+class _SwitchAndCheckBoxTestRouteState extends State<SwitchAndCheckBoxTestRoute>{
+  bool _switchSelected = true;
+  bool _checkboxSelected = true;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Switch(
+          value: _switchSelected,
+          onChanged: (value){
+            setState(() {
+              _switchSelected = value;
+            });
+          },
+        ),
+        Checkbox(
+          value: _checkboxSelected,
+          activeColor: Colors.red,
+          onChanged: (value){
+            setState(() {
+              _checkboxSelected = value;
+            });
+          },
+        )
+      ],
+    );
+  }
+
+}
+
+class ButtonTestWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        RaisedButton(
+          child: Text("RaisedButton"),
+          onPressed: ()=>{},
+        ),
+        FlatButton(
+          child: Text("FlatButton"),
+          onPressed: ()=>{},
+        ),
+        OutlineButton(
+          child: Text("OutlineButton"),
+          onPressed: ()=>{},
+        ),
+        IconButton(
+          icon: Icon(Icons.thumb_up),
+          onPressed: ()=>{},
+        )
+      ],
+    );
+  }
+
+}
+
+class TextFieldTestWidget extends StatelessWidget{
+
+  /// 定义一个controller
+  TextEditingController _unameController = new TextEditingController();
+
+
+  @override
+  Widget build(BuildContext context) {
+    _unameController.addListener(()=>{
+      print(_unameController.text)
+    });
+    return Column(
+      children: <Widget>[
+        TextField(
+          controller: _unameController,
+          decoration: InputDecoration(
+            labelText: "用户名",
+            hintText: "用户名或邮箱",
+            prefixIcon: Icon(Icons.person)
+          ),
+          onChanged: (v){
+            print("onChange:$v");
+          },
+        ),
+        TextField(
+          decoration: InputDecoration(
+            labelText: "密码",
+            hintText: "您的登录密码",
+            prefixIcon: Icon(Icons.lock)
+          ),
+          obscureText: true,
+        )
+      ],
+    );
+  }
+
 }
 
 

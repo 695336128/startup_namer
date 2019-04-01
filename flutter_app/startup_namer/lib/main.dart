@@ -1,9 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'second.dart';
-
-// mian函数使用了(=>)符号，这是Dart中单行函数或者方法的简写
-void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Startup',
       theme: new ThemeData(
-        primaryColor: Colors.blue,
+        primaryColor: Colors.red,
       ),
       routes: {
         "secondpage":(context)=> MyScaffold()
@@ -42,8 +41,9 @@ class RandomWordsState extends State<RandomWords> {
       ),
       body: _buildSuggetions(),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){Navigator.pushNamed(context, "secondpage");},
+          onPressed: _jumpRoute,
           icon: Icon(Icons.add),
+          backgroundColor: Colors.red,
           label: Text('Jump')
       )
     );
@@ -59,7 +59,6 @@ class RandomWordsState extends State<RandomWords> {
           // 在每一列钱添加一个1px高的分割线widget
           if (i.isOdd) return new Divider();
           final index = i ~/ 2;
-          print(index);
           // 如果是建议列表中最后一个单词对
           if (index >= _suggestions.length) {
             // 接着再生成10个单词对，然后添加到建议列表
@@ -93,9 +92,7 @@ class RandomWordsState extends State<RandomWords> {
     );
   }
 
-  /**
-   * 跳转到收藏页
-   */
+  /// 跳转到收藏页
   void _pushSaved() {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       final tiles = _saved.map((pair) {
@@ -120,9 +117,7 @@ class RandomWordsState extends State<RandomWords> {
     }));
   }
 
-  /**
-   * 跳转到另一页
-   */
+  /// 跳转到另一页
   void _jumpRoute() {
     Navigator.push(context,
         new MaterialPageRoute(builder: (context){
