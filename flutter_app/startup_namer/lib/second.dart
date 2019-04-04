@@ -132,7 +132,7 @@ class TextTestWidget extends StatelessWidget{
         Text("Hello World",
           textAlign: TextAlign.center,
         ),
-        Text("Hello World" * 4,
+        Text("Hello World" * 8,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -190,6 +190,17 @@ class _SwitchAndCheckBoxTestRouteState extends State<SwitchAndCheckBoxTestRoute>
               _checkboxSelected = value;
             });
           },
+
+        ),
+        Checkbox(
+          value: _checkboxSelected,
+          activeColor: Colors.red,
+          onChanged: (value){
+            setState(() {
+              _checkboxSelected = value;
+            });
+          },
+
         )
       ],
     );
@@ -208,6 +219,11 @@ class ButtonTestWidget extends StatelessWidget{
         ),
         FlatButton(
           child: Text("FlatButton"),
+          color: Colors.blue,
+          highlightColor: Colors.blue[700],
+          colorBrightness: Brightness.dark,
+          splashColor: Colors.grey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           onPressed: ()=>{},
         ),
         OutlineButton(

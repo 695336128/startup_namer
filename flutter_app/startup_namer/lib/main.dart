@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.red,
       ),
-      routes: {
-        "secondpage":(context)=> MyScaffold()
-      },
+      routes: {"secondpage": (context) => MyScaffold()},
       home: new RandomWords(),
     );
   }
@@ -33,24 +31,23 @@ class RandomWordsState extends State<RandomWords> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Startup Name Generator'),
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
-        ],
-      ),
-      body: _buildSuggetions(),
-      floatingActionButton: FloatingActionButton.extended(
+        appBar: new AppBar(
+          title: new Text('Startup Name Generator'),
+          actions: <Widget>[
+            new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+          ],
+        ),
+        body: _buildSuggetions(),
+        floatingActionButton: FloatingActionButton(
           onPressed: _jumpRoute,
-          icon: Icon(Icons.add),
+          child: Icon(Icons.add),
           backgroundColor: Colors.red,
-          label: Text('Jump')
-      )
-    );
+        ));
   }
 
   Widget _buildSuggetions() {
-    return new ListView.builder(
+    return ListView.builder(
+        physics: BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16.0),
         // 对于每一个建议的单词都会调用一次itemBuilder，然后将单词添加到ListTile行中
         // 在偶数行，改函数会为单词对添加一个ListTile row
@@ -119,15 +116,13 @@ class RandomWordsState extends State<RandomWords> {
 
   /// 跳转到另一页
   void _jumpRoute() {
-    Navigator.push(context,
-        new MaterialPageRoute(builder: (context){
-          return MyScaffold();
-        }));
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return MyScaffold();
+    }));
   }
 }
 
-
-class NewRoute extends StatelessWidget{
+class NewRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,5 +134,4 @@ class NewRoute extends StatelessWidget{
       ),
     );
   }
-
 }

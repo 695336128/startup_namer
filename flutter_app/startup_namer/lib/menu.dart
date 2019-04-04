@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:startup_namer/ScaffoldPage.dart';
+import 'package:startup_namer/flex.dart';
 import 'package:startup_namer/second.dart';
+import 'package:startup_namer/transform.dart';
+import 'package:startup_namer/wrap.dart';
 import 'main.dart';
 
 void main() => runApp(MenuApp());
@@ -13,7 +17,11 @@ class MenuApp extends StatelessWidget {
       home: MenuScaffold(),
       routes: {
         "mainPage": (context) => MyApp(),
-        "secondPage": (context) => MyScaffold()
+        "secondPage": (context) => MyScaffold(),
+        "flexPage": (context) => FlexPage(),
+        "wrapPage": (context) => WrapScaffold(),
+        "transformPage": (context) => TransformScaffold(),
+        "scaffoldPage": (context) => DemoPage(),
       },
     );
   }
@@ -43,15 +51,80 @@ class MenuScaffold extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [Colors.red,Colors.orange[700]]),
+                  borderRadius: BorderRadius.circular(3.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black54,
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 4.0
+                    )
+                  ]
+                ),
+                child: FlatButton(
+                  child: Text(
+                    "Base Widget Page",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.transparent,
+                  onPressed: () => {_jumpPage(context, "secondPage")},
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
               child: RaisedButton(
                 child: Text(
-                  "Base Widget Page",
+                  "Flex Page",
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Colors.red,
-                onPressed: () => {_jumpSecondPage(context)},
+                onPressed: () => {_jumpPage(context, "flexPage")},
               ),
-            )
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 80.0,
+              child: RaisedButton(
+                child: Text(
+                  "Wrap Page",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.red,
+                onPressed: () => {_jumpPage(context, "wrapPage")},
+              ),
+            ),
+           Container(
+             padding: EdgeInsets.only(top: 10.0),
+             width: double.infinity,
+             child: DecoratedBox(
+               decoration: BoxDecoration(
+                 gradient: RadialGradient(colors: [Colors.red,Colors.deepOrange]),
+                 borderRadius: BorderRadiusDirectional.circular(20.0)
+               ),
+               child: FlatButton(
+                 child: Text(
+                   "Transform Page",
+                   style: TextStyle(color: Colors.white),
+                 ),
+                 color: Colors.transparent,
+                 onPressed: ()=>{_jumpPage(context, "transformPage")},
+               ),
+             ),
+           ),
+            Container(
+              width: double.infinity,
+              child: RaisedButton(
+                child: Text(
+                  "ScaffoldPage",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.red,
+                onPressed: () => {_jumpPage(context, "scaffoldPage")},
+              ),
+            ),
           ],
         ),
       ),
@@ -64,7 +137,7 @@ class MenuScaffold extends StatelessWidget {
     }));
   }
 
-  _jumpSecondPage(BuildContext context) {
-    Navigator.pushNamed(context, "secondPage");
+  _jumpPage(BuildContext context,String routerName) {
+    Navigator.pushNamed(context,routerName);
   }
 }
