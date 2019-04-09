@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 
-class DemoPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "一个示例界面",
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-      ),
-      home: ScaffoldRoute(),
-    );
-  }
-}
-
 class ScaffoldRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class TransformPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "Transform Page",
-      theme: ThemeData(primaryColor: Colors.red[400]),
-      home: TransformPage(),
-    );
-  }
-}
-
 class TransformScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

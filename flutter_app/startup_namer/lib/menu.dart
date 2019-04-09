@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:startup_namer/GradView.dart';
 import 'package:startup_namer/ScaffoldPage.dart';
 import 'package:startup_namer/flex.dart';
+import 'package:startup_namer/listview.dart';
 import 'package:startup_namer/second.dart';
+import 'package:startup_namer/singlechildscrollview.dart';
 import 'package:startup_namer/transform.dart';
 import 'package:startup_namer/wrap.dart';
 import 'main.dart';
@@ -21,7 +24,10 @@ class MenuApp extends StatelessWidget {
         "flexPage": (context) => FlexPage(),
         "wrapPage": (context) => WrapScaffold(),
         "transformPage": (context) => TransformScaffold(),
-        "scaffoldPage": (context) => DemoPage(),
+        "scaffoldPage": (context) => ScaffoldRoute(),
+        "singleChildScrollView": (context) => SingleChildScrollViewPage(),
+        "listviewPage": (context) => listviewRoute(),
+        "gradviewPage": (context) => gradviewPage(),
       },
     );
   }
@@ -36,98 +42,66 @@ class MenuScaffold extends StatelessWidget {
       ),
       body: Container(
         color: Colors.amber,
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                child: Text(
-                  "List Page",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.red,
-                onPressed: () => {_jumpMainPage(context)},
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [Colors.red,Colors.orange[700]]),
-                  borderRadius: BorderRadius.circular(3.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black54,
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 4.0
-                    )
-                  ]
-                ),
-                child: FlatButton(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: RaisedButton(
                   child: Text(
-                    "Base Widget Page",
+                    "List Page",
                     style: TextStyle(color: Colors.white),
                   ),
-                  color: Colors.transparent,
-                  onPressed: () => {_jumpPage(context, "secondPage")},
+                  color: Colors.red,
+                  onPressed: () => {_jumpMainPage(context)},
                 ),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                child: Text(
-                  "Flex Page",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.red,
-                onPressed: () => {_jumpPage(context, "flexPage")},
+              CustomizeButton(
+                routeName: "Base Widget Page",
+                onPressed: ()=>{_jumpPage(context, "secondPage")},
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 80.0,
-              child: RaisedButton(
-                child: Text(
-                  "Wrap Page",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.red,
-                onPressed: () => {_jumpPage(context, "wrapPage")},
+              CustomizeButton(
+                routeName: "flexPage",
+                onPressed: ()=>{_jumpPage(context, "flexPage")},
               ),
-            ),
-           Container(
-             padding: EdgeInsets.only(top: 10.0),
-             width: double.infinity,
-             child: DecoratedBox(
-               decoration: BoxDecoration(
-                 gradient: RadialGradient(colors: [Colors.red,Colors.deepOrange]),
-                 borderRadius: BorderRadiusDirectional.circular(20.0)
-               ),
-               child: FlatButton(
-                 child: Text(
-                   "Transform Page",
-                   style: TextStyle(color: Colors.white),
-                 ),
-                 color: Colors.transparent,
-                 onPressed: ()=>{_jumpPage(context, "transformPage")},
-               ),
-             ),
-           ),
-            Container(
-              width: double.infinity,
-              child: RaisedButton(
-                child: Text(
-                  "ScaffoldPage",
-                  style: TextStyle(color: Colors.white),
+              SizedBox(
+                width: double.infinity,
+                height: 80.0,
+                child: RaisedButton(
+                  child: Text(
+                    "Wrap Page",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.red,
+                  onPressed: () => {_jumpPage(context, "wrapPage")},
                 ),
-                color: Colors.red,
-                onPressed: () => {_jumpPage(context, "scaffoldPage")},
               ),
-            ),
-          ],
+              CustomizeButton(
+                routeName: "transformPage",
+                onPressed: ()=>{_jumpPage(context, "transformPage")},
+              ),
+              CustomizeButton(
+                routeName: "scaffoldPage",
+                onPressed: ()=>{_jumpPage(context, "scaffoldPage")},
+              ),
+              CustomizeButton(
+                routeName: "singleChildScrollView",
+                onPressed: ()=>{_jumpPage(context, "singleChildScrollView")},
+              ),
+              CustomizeButton(
+                routeName: "listviewPage",
+                onPressed: ()=>{_jumpPage(context, "listviewPage")},
+              ),
+              CustomizeButton(
+                routeName: "gradviewPage",
+                onPressed: ()=>{_jumpPage(context, "gradviewPage")},
+              ),
+            ],
+          ),
         ),
-      ),
+      )
+
     );
   }
 
@@ -140,4 +114,44 @@ class MenuScaffold extends StatelessWidget {
   _jumpPage(BuildContext context,String routerName) {
     Navigator.pushNamed(context,routerName);
   }
+}
+
+class CustomizeButton extends StatelessWidget{
+
+  CustomizeButton({Key key,@required this.routeName, @required this.onPressed}) : super(key: key);
+
+  final String routeName;
+  final VoidCallback onPressed;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+      margin: EdgeInsets.symmetric(vertical: 2.0),
+      width: double.infinity,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [Colors.red,Colors.orangeAccent]),
+            borderRadius: BorderRadius.circular(3.0),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black26,
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 4.0
+              )
+            ]
+        ),
+        child: FlatButton(
+          child: Text(
+            routeName,
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.transparent,
+          onPressed: onPressed,
+        ),
+      ),
+
+    );
+  }
+
 }

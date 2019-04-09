@@ -1,17 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
-class WrapPage extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "Wrap Page",
-      theme: ThemeData(primaryColor: Colors.green),
-      home: WrapScaffold(),
-    );
-  }
-
-}
 
 class WrapScaffold extends StatelessWidget{
   @override
